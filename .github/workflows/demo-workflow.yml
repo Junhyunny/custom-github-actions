@@ -1,0 +1,30 @@
+name: Demo workflow
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  sum:
+    runs-on: ubuntu-latest
+    steps:
+      - id: id-sum
+        uses: junhyunny/sum@main
+        with:
+          x: 10
+          y: 5
+      - name: result
+        run: |
+          echo "sum result is ${{steps.id-sum.outputs.sum-result}}"
+  minus:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: id-minus
+        uses: ./.github/actions/minus
+        with:
+          x: 10
+          y: 5
+      - name: result
+        run: |
+          echo "minus result is ${{steps.id-minus.outputs.minus-result}}"

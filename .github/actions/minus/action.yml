@@ -1,0 +1,20 @@
+name: Minus
+description: Minus
+
+inputs:
+  x:
+    default: 0
+  y:
+    default: 0
+
+outputs:
+  minus-result:
+    value: ${{steps.minus.outputs.aaa}}
+    description: minus result
+
+runs:
+  using: "composite"
+  steps:
+    - id: minus
+      shell: bash
+      run: echo "aaa=$((${{ inputs.x }} - ${{ inputs.y }}))" >> $GITHUB_OUTPUT
